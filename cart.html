@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAMBURINS | 장바구니</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/account.css">
+</head>
+<body class="acc-page">
+
+<div data-site-header data-variant="light" data-nav-size="18"></div>
+
+<main class="acc-wrap cart">
+  <section class="cart__table">
+    <h1 class="acc-title">장바구니</h1>
+    <div class="cart__cols"><span>제품명</span><span>수량</span><span>가격</span><span></span></div>
+    <div data-cart-body></div>
+  </section>
+
+  <aside class="cart__aside">
+    <a href="category.html" class="cart-promo">
+      <img src="assets/images/cart-promo.png" alt="">
+      <span>VIEW MORE</span>
+    </a>
+    <div class="cart__summary">
+      <dl class="acc-amounts">
+        <dt>주문금액</dt><dd data-subtotal>166,000원</dd>
+        <dt>배송비 <span class="acc-chip">3만원 이상 구매시 무료</span></dt><dd data-shipping>0원</dd>
+      </dl>
+      <div class="acc-total"><p>총 주문금액</p><p data-total>166,000원</p></div>
+      <a href="order.html" class="acc-btn acc-btn--solid cart__checkout" data-checkout><span data-total-btn>166,000원</span>&nbsp;결제하기</a>
+    </div>
+  </aside>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/store.js"></script>
+<script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* =============================================================
+   Category page (Figma 1129:29506, 카테고리페이지 3차 v3).
+   Tokens, header and footer come from style.css; this file holds
+   only what's specific to the category listing.
+   ============================================================= */
+
+
+
+/* ---------- CATEGORY HERO (1920x1080: two 960-wide halves) ---------- */
+.cat-hero { position: relative; width: 100%; aspect-ratio: 1920 / 1080; overflow: hidden; display: flex; background: #000; }
+.cat-hero__gradient { position: absolute; top: 0; left: 0; right: 0; height: calc(17.0833 * var(--vw)); /* 328px */ background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); z-index: 1; }
+.cat-hero__img { width: 50%; height: 100%; overflow: hidden; }
+.cat-hero__img img { width: 100%; height: 100%; object-fit: cover; }
+/* the left shot is a 1080 square under the right half — only its left 960px show */
+.cat-hero__img--left img { object-position: left center; }
+
+/* ---------- FILTER BAR ---------- */
+.cat-filter { margin-top: calc(1.6667 * var(--vw)); /* 32px below the hero */ display: flex; align-items: center; gap: 40px; }
+.cat-filter__title { font-size: 20px; font-weight: 600; line-height: 1.3; color: #191718; white-space: nowrap; }
+.cat-filter__divider { display: block; width: 1px; height: 16px; background: #191718; }
+.cat-filter__chips { display: flex; align-items: center; gap: 40px; }
+.cat-filter__chips a { font-size: 16px; font-weight: 400; line-height: 1.3; color: var(--c-gray-light); white-space: nowrap; }
+.cat-filter__chips a.is-active { color: #191718; text-decoration: underline; text-underline-offset: 3px; }
+.cat-filter__chips a:hover { color: #191718; }
+
+/* ---------- PRODUCT GRID ----------
+   4 x 450px cells with 20px gutters; each cell is a 450x600 box with a
+   1px bottom rule and a 360x480 product shot inset 45px / 60px. */
+.cat-grid-section { margin-top: calc(2.0833 * var(--vw)); /* 40px */ }
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: calc(1.0417 * var(--vw)); /* 20px */ row-gap: calc(3.125 * var(--vw)); /* 60px */ }
+.cat-card { display: flex; flex-direction: column; }
+.cat-card__image { display: block; aspect-ratio: 450 / 600; border-bottom: 1px solid var(--c-ink); padding: 13.3333% 10% 0; /* 60px / 45px of 450 */ }
+.cat-card__image img { width: 100%; aspect-ratio: 360 / 480; object-fit: cover; transition: opacity .2s ease; }
+.cat-card__image:hover img { opacity: .85; }
+.cat-card__info { margin-top: calc(1.0417 * var(--vw)); /* 20px */ display: flex; flex-direction: column; color: #191718; }
+.cat-card__notes { font-size: 15px; font-weight: 400; line-height: 1.2; white-space: pre; }
+.cat-card__name { font-size: 18px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+.cat-card__price { margin-top: 8px; font-size: 20px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+
+
+.cat-promo { grid-column: 3 / 5; position: relative; display: block; aspect-ratio: 920 / 600; overflow: hidden; }
+.cat-promo img { width: 100%; height: 100%; object-fit: cover; }
+.cat-promo__gradient { position: absolute; left: 0; right: 0; bottom: 0; height: 29.5%; /* 177px */ background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); }
+.cat-promo__more { position: absolute; right: 2.1739%; /* 20px of 920 */ bottom: 16px; font-size: 15px; font-weight: 400; line-height: 1.2; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+.cat-footer-logo { display: flex; justify-content: center; margin-top: calc(9.375 * var(--vw)); /* 180px */ margin-bottom: calc(9.375 * var(--vw)); /* 180px */ }
+.cat-footer-logo img { width: calc(10.5278 * var(--vw)); height: auto; }

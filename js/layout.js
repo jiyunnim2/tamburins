@@ -1,0 +1,149 @@
+// TAMBURINS — shared header + footer.
+// Every page drops in <div data-site-header> / <div data-site-footer>
+// placeholders and this script renders the same markup into them, so
+// the 9-item nav, icon set and footer stay identical across pages.
+//
+// Header variants (data-variant):
+//   "overlay" — white logo/nav/icons laid over a hero image (main, category)
+//   "light"   — dark logo/nav/icons on the page background (all other pages)
+// data-nav-size sets the nav type size; Figma uses 18px on most pages
+// and 20px on the product detail page.
+
+(function () {
+  const NAV = [
+    { label: '블루히노키', href: 'index.html' },
+    { label: '기프트', href: 'category.html', accent: true },
+    { label: '퍼퓸', href: 'category.html' },
+    { label: '핸드&amp;립', href: 'category.html' },
+    { label: '바디', href: 'category.html' },
+    { label: '홈 프래그런스', href: 'category.html' },
+    { label: '향 노트', href: 'product.html' },
+    { label: '컬렉션', href: 'category.html' },
+    { label: '스토어', href: '#' },
+  ];
+
+  function headerMarkup(variant, navSize) {
+    const dark = variant === 'light';
+    const sfx = dark ? '-dark' : '';
+    const nav = NAV.map((item) =>
+      `<a href="${item.href}"${item.accent ? ' class="is-accent"' : ''}>${item.label}</a>`
+    ).join('');
+
+    return `
+      <header class="site-header site-header--${variant}" style="--nav-size:${navSize}px">
+        <div class="site-header__left">
+          <a href="index.html" class="site-header__logo">
+            <img src="assets/icons/logo-wordmark${sfx}.svg" alt="TAMBURINS" width="202" height="25">
+          </a>
+          <nav class="site-nav">${nav}</nav>
+        </div>
+        <div class="site-header__icons">
+          <a href="#" aria-label="검색"><img src="assets/icons/icon-search${sfx}.svg" alt=""></a>
+          <a href="mypage.html" aria-label="마이페이지" data-account-link><img src="assets/icons/icon-person${sfx}.svg" alt=""></a>
+          <a href="cart.html" aria-label="장바구니"><img src="assets/icons/icon-bag${sfx}.svg" alt=""></a>
+        </div>
+      </header>`;
+  }
+
+  const FOOTER = `
+    <footer class="site-footer">
+      <div class="site-footer__top">
+        <nav class="footer-nav">
+          <div class="footer-nav__col">
+            <p class="footer-nav__title">매장안내</p>
+            <ul>
+              <li><a href="#">대한민국</a></li>
+              <li><a href="#">일본</a></li>
+              <li><a href="#">중국</a></li>
+              <li><a href="#">태국</a></li>
+              <li><a href="#">전시</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav__col">
+            <p class="footer-nav__title">고객서비스</p>
+            <ul>
+              <li><a href="mypage.html">비회원 주문 조회</a></li>
+              <li><a href="#">특별한 혜택</a></li>
+              <li><a href="#">교환 및 반품</a></li>
+              <li><a href="#">자주 묻는 질문</a></li>
+              <li><a href="#">1:1문의하기</a></li>
+              <li><a href="#">기업 구매</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav__col">
+            <p class="footer-nav__title">법적 고지</p>
+            <ul>
+              <li><a href="#">공지사항</a></li>
+              <li><a href="#">이용 약관</a></li>
+              <li><a href="#" class="is-strong">개인정보처리방침</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav__col">
+            <p class="footer-nav__title">소셜 미디어</p>
+            <ul>
+              <li><a href="#">인스타그램</a></li>
+              <li><a href="#">카카오톡</a></li>
+              <li><a href="#">페이스북</a></li>
+              <li><a href="#">웨이보</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="footer-newsletter">
+          <div class="footer-newsletter__heading">
+            <p class="footer-newsletter__title">Stay Connected</p>
+            <p class="footer-newsletter__desc">탬버린즈의 새로운 컬렉션과 소식을<br>가장 먼저 받아보세요.</p>
+          </div>
+          <form class="footer-newsletter__form" id="newsletterForm" novalidate>
+            <div class="newsletter-row">
+              <input type="email" name="email" placeholder="이메일 주소를 입력해 주세요." required aria-label="이메일 주소">
+              <button type="submit" aria-label="구독하기">
+                <img src="assets/icons/icon-arrow-forward.svg" alt="">
+              </button>
+            </div>
+            <hr class="footer-divider">
+          </form>
+        </div>
+
+        <div class="footer-divider--vertical" aria-hidden="true"></div>
+      </div>
+
+      <hr class="footer-divider footer-divider--legal-gap">
+
+      <div class="site-footer__legal">
+        <div class="footer-business">
+          <p>주)아이아이컴바인드 | 사업자등록번호: 119-86-38589 | 대표자: 김한국 | 서울특별시 성동구 뚝섬로 433 | 대표번호: 1644-1246</p>
+          <p>이메일: Service.Kr@Tamburins.Com | 개인정보 보호 책임자: 정태호 | 호스팅 서비스 사업자: Aws | 통신판매업신고: 제 2014-서울마포-1050 호</p>
+          <a href="#" class="footer-business__cctv">사업자정보확인고정형 영상 정보 처리기기 운영 및 관리</a>
+        </div>
+        <div class="footer-guarantee">
+          <p>고객님의 안전한 현금자산 거래를 위하여 하나은행과 채무지급보증계약을 체결하여 보장해드리고 있습니다.</p>
+          <a href="#">서비스 가입사실 확인</a>
+        </div>
+      </div>
+
+      <hr class="footer-divider">
+
+      <div class="site-footer__bottom">
+        <p class="footer-copyright">© Tamburins</p>
+        <a href="#" class="footer-shop-kr">
+          <span>SHOP IN KOREAN</span>
+          <img src="assets/icons/icon-arrow-forward-ios-footer.svg" alt="">
+        </a>
+      </div>
+    </footer>`;
+
+  document.querySelectorAll('[data-site-header]').forEach((slot) => {
+    slot.outerHTML = headerMarkup(slot.dataset.variant || 'light', slot.dataset.navSize || 18);
+  });
+  document.querySelectorAll('[data-site-footer]').forEach((slot) => {
+    if (!slot.hasAttribute('data-ruled')) { slot.outerHTML = FOOTER; return; }
+    // ruled variant (product, category): the bank-guarantee note moves up
+    // under the newsletter column instead of sitting in the legal row
+    const tpl = document.createElement('template');
+    tpl.innerHTML = FOOTER.replace('class="site-footer"', 'class="site-footer site-footer--ruled"').trim();
+    const footer = tpl.content.firstElementChild;
+    footer.querySelector('.footer-newsletter').appendChild(footer.querySelector('.footer-guarantee'));
+    slot.replaceWith(footer);
+  });
+})();

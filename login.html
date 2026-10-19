@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAMBURINS | 로그인</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/account.css">
+</head>
+<body>
+
+<main class="login" data-mode="login">
+  <section class="login__panel">
+    <a href="index.html" class="login__logo"><img src="assets/icons/logo-wordmark-dark.svg" alt="TAMBURINS" width="202" height="25"></a>
+    <hr class="login__rule">
+
+    <form class="login__form" id="loginForm" novalidate>
+      <div class="login__head">
+        <h1 class="login__label"><span data-only="login">로그인</span><span data-only="signup">회원가입</span></h1>
+        <a href="mypage.html?guest=1" class="login__guest" data-only="login">비회원 주문조회 <img src="assets/icons/icon-chevron-forward-16.svg" alt=""></a>
+        <button type="button" class="login__guest" data-only="signup" data-mode-switch="login">로그인으로 돌아가기 <img src="assets/icons/icon-chevron-forward-16.svg" alt=""></button>
+      </div>
+      <input class="login__field" type="email" name="email" placeholder="아이디(이메일)" autocomplete="username" required>
+      <input class="login__field" type="password" name="password" placeholder="비밀번호" autocomplete="current-password" minlength="6" required>
+      <p class="login__msg" role="alert" data-msg></p>
+      <button type="submit" class="login__submit"><span data-only="login">로그인</span><span data-only="signup">가입하기</span></button>
+
+      <div class="login__links">
+        <button type="button" data-find="id">아이디 찾기</button>
+        <i></i>
+        <button type="button" data-find="password">비밀번호 찾기</button>
+        <i></i>
+        <button type="button" data-mode-switch="signup">회원가입</button>
+      </div>
+
+      <div class="login__social">
+        <button type="button" class="kakao" data-social="카카오"><img src="assets/icons/icon-kakao.svg" alt="">카카오 로그인</button>
+        <button type="button" class="naver" data-social="네이버"><img src="assets/icons/icon-naver.svg" alt="">네이버 로그인</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="login__photo"><img src="assets/images/login-bg.jpg" alt=""></div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
