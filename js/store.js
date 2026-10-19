@@ -15,7 +15,7 @@
   const SHIPPING_FREE_OVER = 30000;
   const SHIPPING_FEE = 3000;
 
-  // Catalog — mirrors supabase/functions/create-order/catalog.ts, which is
+  // Catalog — mirrors CATALOG in supabase/functions/create-order/index.ts, which is
   // the price source of truth when an order is placed.
   const PRODUCTS = {
     'perfume-blue-hinoki': {

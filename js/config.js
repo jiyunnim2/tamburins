@@ -1,6 +1,6 @@
 // Public Supabase settings (anon key is safe to ship; access is limited by RLS).
-// Filled in when the TAMBURINS Supabase project is created.
+// Project: tamburins (ap-northeast-2, Seoul).
 window.TAMBURINS_CONFIG = {
-  supabaseUrl: '',
+  supabaseUrl: 'https://irwmjnywolxdgfdiddxu.supabase.co',
   supabaseAnonKey: '',
 };
