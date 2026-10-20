@@ -42,7 +42,15 @@
           <nav class="site-nav">${nav}</nav>
         </div>
         <div class="site-header__icons">
-          <a href="#" aria-label="검색"><img src="assets/icons/icon-search${sfx}.svg" alt=""></a>
+          <div class="site-search" data-search>
+            <button type="button" class="site-search__toggle" aria-label="검색 열기" aria-expanded="false" aria-controls="siteSearchInput">
+              <img class="site-search__icon" src="assets/icons/icon-search${sfx}.svg" alt="">
+              <img class="site-search__icon site-search__icon--open" src="assets/icons/icon-search-open${sfx}.svg" alt="">
+            </button>
+            <form class="site-search__form" action="category.html" role="search">
+              <input id="siteSearchInput" type="search" name="q" placeholder="NEW 컬렉션 블루히노키를 만나보세요." aria-label="검색어" autocomplete="off" tabindex="-1">
+            </form>
+          </div>
           <a href="mypage.html" aria-label="마이페이지" data-account-link><img src="assets/icons/icon-person${sfx}.svg" alt=""></a>
           <a href="cart.html" aria-label="장바구니"><img src="assets/icons/icon-bag${sfx}.svg" alt=""></a>
         </div>
@@ -140,6 +148,40 @@
   document.querySelectorAll('[data-site-header]').forEach((slot) => {
     slot.outerHTML = headerMarkup(slot.dataset.variant || 'light');
   });
+  // Header search (Figma 메인페이지 3차 v3-2): the magnifier opens a
+  // 213px underlined field to its right, pushing the icon group left.
+  // Enter searches the category page; the magnifier submits when there is
+  // text and closes the field when it is empty; Esc / clicking away closes.
+  document.querySelectorAll('[data-search]').forEach((box) => {
+    const toggle = box.querySelector('.site-search__toggle');
+    const form = box.querySelector('form');
+    const input = form.querySelector('input');
+    const setOpen = (open) => {
+      box.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? '검색하기' : '검색 열기');
+      input.tabIndex = open ? 0 : -1;
+      if (open) setTimeout(() => input.focus(), 50);
+    };
+    const query = new URLSearchParams(location.search).get('q');
+    if (query && /category\.html$/.test(location.pathname)) { input.value = query; setOpen(true); }
+
+    toggle.addEventListener('click', () => {
+      if (!box.classList.contains('is-open')) setOpen(true);
+      else if (input.value.trim()) form.requestSubmit();
+      else setOpen(false);
+    });
+    form.addEventListener('submit', (e) => {
+      const q = input.value.trim();
+      if (!q) { e.preventDefault(); input.focus(); return; }
+      input.value = q;
+    });
+    input.addEventListener('keydown', (e) => { if (e.key === 'Escape') { setOpen(false); toggle.focus(); } });
+    document.addEventListener('click', (e) => {
+      if (box.classList.contains('is-open') && !box.contains(e.target) && !input.value.trim()) setOpen(false);
+    });
+  });
+
   document.querySelectorAll('[data-site-footer]').forEach((slot) => {
     if (!slot.hasAttribute('data-ruled')) { slot.outerHTML = FOOTER; return; }
     // ruled variant (product, category): the bank-guarantee note moves up

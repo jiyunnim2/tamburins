@@ -3,6 +3,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeroBanner();
+  initCategorySearch();
   initScentStoryNav();
   initNewsletterForm();
 });
@@ -38,6 +39,29 @@ function initHeroBanner() {
 
   window.addEventListener('pageshow', (event) => { if (event.persisted) show(0); });
   show(0);
+}
+
+// Category page as search results: ?q= filters the product cards by
+// name / notes (spaces and case ignored) and says so when nothing matches.
+function initCategorySearch() {
+  const grid = document.querySelector('.cat-grid');
+  const q = new URLSearchParams(location.search).get('q');
+  if (!grid || !q) return;
+  const norm = (t) => t.toLowerCase().replace(/\s+/g, '');
+  const needle = norm(q);
+  let hits = 0;
+  grid.querySelectorAll('.cat-card').forEach((card) => {
+    const hay = norm(card.querySelector('.cat-card__name').textContent + card.querySelector('.cat-card__notes').textContent);
+    const show = hay.includes(needle);
+    card.hidden = !show;
+    if (show) hits += 1;
+  });
+  const promo = grid.querySelector('.cat-promo');
+  if (promo) promo.hidden = true;
+  const note = document.createElement('p');
+  note.className = 'cat-search-note';
+  note.textContent = hits ? `'${q}' 검색 결과 ${hits}개` : `'${q}'에 대한 검색 결과가 없습니다.`;
+  grid.before(note);
 }
 
 // Scent Story section currently ships with a single fragrance (블루히노키).

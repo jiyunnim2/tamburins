@@ -154,6 +154,22 @@ button { font-family: inherit; }
 .site-header__icons img { width: calc(1.25 * var(--vw)); height: calc(1.25 * var(--vw)); } /* 24px */
 .site-header__icons a:hover { opacity: .7; }
 
+/* header search (Figma v3-2): closed = magnifier only; open = the field
+   slides out to its right (10px gap, 213px, 12px type, 0.75px underline) */
+.site-search { display: flex; align-items: flex-start; height: calc(1.25 * var(--vw)); }
+.site-search__toggle { flex-shrink: 0; width: calc(1.25 * var(--vw)); height: calc(1.25 * var(--vw)); padding: 0; border: none; background: none; cursor: pointer; }
+.site-search__toggle:hover { opacity: .7; }
+.site-search__icon { width: 100%; height: 100%; }
+.site-search__icon--open, .site-search.is-open .site-search__icon { display: none; }
+.site-search.is-open .site-search__icon--open { display: block; }
+.site-search__form { width: 0; margin: 0; overflow: hidden; transition: width .35s ease, margin-left .35s ease; }
+.site-search.is-open .site-search__form { width: max(calc(11.0938 * var(--vw)), 213px); /* 213px at 1920, never narrower than the placeholder */ margin-left: calc(0.5208 * var(--vw)); /* 10px */ }
+.site-search__form input { display: block; width: 100%; height: 21px; margin: 0; padding: 0 0 0 2px; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.75); /* Figma 0.75px white; Chrome draws 0.75px as a full 1px */ border-radius: 0; background: none; outline: none; font-family: inherit; font-size: 12px; line-height: 1.6; color: #fff; -webkit-appearance: none; appearance: none; }
+.site-search__form input::placeholder { color: #fff; opacity: 1; }
+.site-search__form input::-webkit-search-cancel-button { display: none; }
+.site-header--light .site-search__form input { border-bottom-color: rgba(17, 17, 17, 0.75); color: var(--c-ink); }
+.site-header--light .site-search__form input::placeholder { color: var(--c-ink); }
+
 /* light variant — sits in the page flow on the #efefef background
    (product, login-less account pages) instead of overlaying a hero */
 .site-header--light { position: relative; }

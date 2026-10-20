@@ -45,3 +45,6 @@
 
 .cat-footer-logo { display: flex; justify-content: center; margin-top: calc(9.375 * var(--vw)); /* 180px */ margin-bottom: calc(9.375 * var(--vw)); /* 180px */ }
 .cat-footer-logo img { width: calc(10.5278 * var(--vw)); height: auto; }
+
+/* search results note (category.html?q=…) */
+.cat-search-note { margin-bottom: calc(1.0417 * var(--vw)); font-size: 16px; line-height: 1.3; color: var(--c-label); }
