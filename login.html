@@ -21,8 +21,8 @@
         <a href="mypage.html?guest=1" class="login__guest" data-only="login">비회원 주문조회 <img src="assets/icons/icon-chevron-forward-16.svg" alt=""></a>
         <button type="button" class="login__guest" data-only="signup" data-mode-switch="login">로그인으로 돌아가기 <img src="assets/icons/icon-chevron-forward-16.svg" alt=""></button>
       </div>
-      <input class="login__field" type="email" name="email" placeholder="아이디(이메일)" autocomplete="username" required>
-      <input class="login__field" type="password" name="password" placeholder="비밀번호" autocomplete="current-password" minlength="6" required>
+      <input class="login__field" type="text" name="email" placeholder="아이디(이메일)" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+      <input class="login__field" type="password" name="password" placeholder="비밀번호" autocomplete="current-password" required>
       <p class="login__msg" role="alert" data-msg></p>
       <button type="submit" class="login__submit"><span data-only="login">로그인</span><span data-only="signup">가입하기</span></button>
 

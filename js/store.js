@@ -1,9 +1,10 @@
 // TAMBURINS — data layer shared by every page.
 //
 //  • Cart: kept in localStorage (works for guests and members alike).
-//  • Auth, orders, newsletter: Supabase. The anon key in js/config.js is
-//    a public, RLS-restricted key. Orders are written by the
-//    `create-order` Edge Function, which re-prices the cart server-side.
+//  • Login: prototype account — ID "tamburins" with any password.
+//  • Orders, newsletter: Supabase. The anon key in js/config.js is a
+//    public, RLS-restricted key. Orders are written by the `create-order`
+//    Edge Function, which re-prices the cart server-side.
 //  • If js/config.js has no Supabase project configured, everything
 //    falls back to localStorage so the prototype still runs offline.
 
@@ -115,48 +116,25 @@
     return { products, bags, gifts, subtotal, shipping, total, count, points };
   }
 
-  /* ---------------- auth ---------------- */
+  /* ---------------- auth ----------------
+     Prototype login: the only account is the ID "tamburins". Any
+     non-empty password is accepted for it; every other ID is rejected.
+     The session lives in localStorage on this browser. */
+  const DEMO_ID = 'tamburins';
+
   async function getUser() {
-    if (sb) {
-      const { data } = await sb.auth.getSession();
-      return data.session ? data.session.user : null;
-    }
     return read(LOCAL_USER_KEY, null);
   }
-  async function signIn(email, password) {
-    if (sb) {
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) throw new Error(translateAuthError(error.message));
-      return data.user;
+  async function signIn(id, password) {
+    if (String(id).trim() !== DEMO_ID || !password) {
+      throw new Error('아이디 또는 비밀번호가 일치하지 않습니다.');
     }
-    const user = { id: 'local-' + email, email };
+    const user = { id: 'member-' + DEMO_ID, email: DEMO_ID, user_metadata: { name: DEMO_ID } };
     write(LOCAL_USER_KEY, user);
     return user;
   }
-  async function signUp(email, password) {
-    if (sb) {
-      const { data, error } = await sb.auth.signUp({ email, password });
-      if (error) throw new Error(translateAuthError(error.message));
-      return data;
-    }
-    return signIn(email, password);
-  }
   async function signOut() {
-    if (sb) await sb.auth.signOut();
     try { localStorage.removeItem(LOCAL_USER_KEY); } catch (e) { /* ignore */ }
-  }
-  async function resetPassword(email) {
-    if (!sb) return;
-    const redirectTo = new URL('login.html', window.location.href).href;
-    const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo });
-    if (error) throw new Error(translateAuthError(error.message));
-  }
-  function translateAuthError(message) {
-    if (/invalid login credentials/i.test(message)) return '아이디 또는 비밀번호가 일치하지 않습니다.';
-    if (/email not confirmed/i.test(message)) return '이메일 인증 후 로그인해 주세요.';
-    if (/already registered/i.test(message)) return '이미 가입된 이메일입니다.';
-    if (/password should be at least/i.test(message)) return '비밀번호는 6자 이상이어야 합니다.';
-    return message;
   }
 
   /* ---------------- orders ---------------- */
@@ -170,8 +148,12 @@
         throw new Error(msg);
       }
       clearCart();
-      if (!(await getUser())) write(GUEST_ORDERS_KEY, [data.order, ...read(GUEST_ORDERS_KEY, [])]);
-      return data.order;
+      // the server stores every order; this browser keeps a copy so the
+      // signed-in member (or the guest) can see it on 마이페이지
+      const user = await getUser();
+      const mine = { ...data.order, user_id: user ? user.id : null };
+      write(user ? LOCAL_ORDERS_KEY : GUEST_ORDERS_KEY, [mine, ...read(user ? LOCAL_ORDERS_KEY : GUEST_ORDERS_KEY, [])]);
+      return mine;
     }
     const cart = getCart();
     const user = await getUser();
@@ -194,11 +176,6 @@
     return order;
   }
   async function listOrders() {
-    if (sb) {
-      const { data, error } = await sb.from('orders').select('*').order('created_at', { ascending: false });
-      if (error) throw error;
-      return data || [];
-    }
     const user = await getUser();
     return read(LOCAL_ORDERS_KEY, []).filter((o) => user && o.user_id === user.id);
   }
@@ -221,7 +198,7 @@
   window.TamburinsStore = {
     PRODUCTS, won, hasSupabase,
     getCart, addToCart, setQty, removeFromCart, clearCart,
-    getUser, signIn, signUp, signOut, resetPassword,
+    getUser, signIn, signOut,
     createOrder, listOrders, getGuestOrders, subscribe,
   };
 })();
