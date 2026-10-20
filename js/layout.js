@@ -6,8 +6,7 @@
 // Header variants (data-variant):
 //   "overlay" — white logo/nav/icons laid over a hero image (main, category)
 //   "light"   — dark logo/nav/icons on the page background (all other pages)
-// data-nav-size sets the nav type size; Figma uses 18px on most pages
-// and 20px on the product detail page.
+// The nav type size is 20px on every page (Figma).
 
 (function () {
   // Only 블루히노키 navigates (to the category page). The other menu
@@ -24,7 +23,7 @@
     { label: '스토어' },
   ];
 
-  function headerMarkup(variant, navSize) {
+  function headerMarkup(variant) {
     const dark = variant === 'light';
     const sfx = dark ? '-dark' : '';
     const nav = NAV.map((item) => {
@@ -35,7 +34,7 @@
     }).join('');
 
     return `
-      <header class="site-header site-header--${variant}" style="--nav-size:${navSize}px">
+      <header class="site-header site-header--${variant}">
         <div class="site-header__left">
           <a href="index.html" class="site-header__logo">
             <img src="assets/icons/logo-wordmark${sfx}.svg" alt="TAMBURINS" width="202" height="25">
@@ -139,7 +138,7 @@
     </footer>`;
 
   document.querySelectorAll('[data-site-header]').forEach((slot) => {
-    slot.outerHTML = headerMarkup(slot.dataset.variant || 'light', slot.dataset.navSize || 18);
+    slot.outerHTML = headerMarkup(slot.dataset.variant || 'light');
   });
   document.querySelectorAll('[data-site-footer]').forEach((slot) => {
     if (!slot.hasAttribute('data-ruled')) { slot.outerHTML = FOOTER; return; }
