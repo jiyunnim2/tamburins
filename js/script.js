@@ -62,7 +62,7 @@ function initNewsletterForm() {
     const email = input.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       input.value = '';
-      input.placeholder = '올바른 이메일 주소를 입력해 주세요.';
+      input.placeholder = '이메일 주소를 확인해 주세요.';
       return;
     }
     try {
