@@ -10,7 +10,7 @@
 
 (function () {
   const CART_KEY = 'tamburins.cart.v1';
-  const LOCAL_USER_KEY = 'tamburins.localUser.v1';
+  const LOCAL_USER_KEY = 'tamburins.localUser.v1'; // legacy persistent session, now cleared on load
   const LOCAL_ORDERS_KEY = 'tamburins.localOrders.v1';
   const GUEST_ORDERS_KEY = 'tamburins.guestOrders.v1'; // orders placed here without an account
   const SHIPPING_FREE_OVER = 30000;
@@ -119,22 +119,35 @@
   /* ---------------- auth ----------------
      Prototype login: the only account is the ID "tamburins". Any
      non-empty password is accepted for it; every other ID is rejected.
-     The session lives in localStorage on this browser. */
+     The session lives in sessionStorage and survives moving between
+     pages, but a page refresh (or a new tab / reopened browser) always
+     signs the visitor out, so they have to log in again. */
   const DEMO_ID = 'tamburins';
+  const SESSION_KEY = 'tamburins.session.v1';
+
+  function readSession() {
+    try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch (e) { return null; }
+  }
+  function clearSession() {
+    try { sessionStorage.removeItem(SESSION_KEY); } catch (e) { /* ignore */ }
+  }
+  try { localStorage.removeItem(LOCAL_USER_KEY); } catch (e) { /* drop the old persistent session */ }
+  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (nav && nav.type === 'reload') clearSession();
 
   async function getUser() {
-    return read(LOCAL_USER_KEY, null);
+    return readSession();
   }
   async function signIn(id, password) {
     if (String(id).trim() !== DEMO_ID || !password) {
       throw new Error('아이디 또는 비밀번호가 일치하지 않습니다.');
     }
     const user = { id: 'member-' + DEMO_ID, email: DEMO_ID, user_metadata: { name: DEMO_ID } };
-    write(LOCAL_USER_KEY, user);
+    try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(user)); } catch (e) { /* private mode */ }
     return user;
   }
   async function signOut() {
-    try { localStorage.removeItem(LOCAL_USER_KEY); } catch (e) { /* ignore */ }
+    clearSession();
   }
 
   /* ---------------- orders ---------------- */
