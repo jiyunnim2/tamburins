@@ -166,7 +166,7 @@ button { font-family: inherit; }
 .hero__line::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; bottom: -8px; } /* easier to click */
 .hero__line span { display: block; width: 0; height: 100%; background: #fff; }
 .hero__line.is-done span { width: 100%; }
-.hero__line.is-running span { animation: hero-fill var(--hero-duration, 5s) linear forwards; }
+.hero__line.is-running span { animation: hero-fill var(--hero-duration, 4s) linear forwards; }
 .hero__line--1 { left: calc(33.8542 * var(--vw)); /* x650 */ }
 .hero__line--2 { left: calc(50.5208 * var(--vw)); /* x970 */ }
 @keyframes hero-fill { from { width: 0; } to { width: 100%; } }

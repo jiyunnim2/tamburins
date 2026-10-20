@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // While banner 2 runs, indicator 1 stays full; returning to banner 1
 // clears both. Every visit to the main page starts at banner 1 —
 // including back/forward navigation restored from the page cache.
-const HERO_DURATION_MS = 5000;
+const HERO_DURATION_MS = 4000;
 
 function initHeroBanner() {
   const slides = document.querySelectorAll('[data-hero] .hero__bg');
