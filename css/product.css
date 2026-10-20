@@ -84,12 +84,12 @@
 .pdp-other__gallery img { width: calc(7.1354 * var(--vw)); height: 100%; max-width: none; object-fit: cover; transition: opacity .2s ease; }
 .pdp-other__gallery a:hover img { opacity: .8; }
 .pdp-other__gallery .pdp-other__peek { width: calc(2.0833 * var(--vw)); /* 40px sliver of the next card */ }
-.pdp-other__panels { margin-left: calc(7.1354 * var(--vw)); /* 137px */ }
+.pdp-other__panels { flex: 1; min-width: 0; max-width: 626px; margin-left: calc(7.1354 * var(--vw)); /* 137px */ }
 .pdp-panel { display: flex; flex-direction: column; gap: 20px; }
 .pdp-panel__title { font-size: 16px; font-weight: 500; line-height: 1.2; }
 .pdp-panel__text { font-size: 16px; line-height: 22px; color: #707070; white-space: nowrap; }
-.pdp-panel__text--wrap { width: 478px; white-space: normal; }
-.pdp-other__line { width: 626px; border: none; border-top: 0.75px solid var(--c-ink); margin: calc(2.625 * var(--vw) - 1.4px) 0 calc(2.1354 * var(--vw) - 1px); }
+.pdp-panel__text--wrap { max-width: 478px; white-space: normal; }
+.pdp-other__line { width: 100%; /* 626px at 1920 */ border: none; border-top: 0.75px solid var(--c-ink); margin: calc(2.625 * var(--vw) - 1.4px) 0 calc(2.1354 * var(--vw) - 1px); }
 
 /* ---------- detail accordion (y1347..2271) ---------- */
 .pdp-info { margin: calc(4.8438 * var(--vw)) calc(var(--gutter) + var(--pdp-inset)) 0; }
