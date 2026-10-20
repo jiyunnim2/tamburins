@@ -10,24 +10,29 @@
 // and 20px on the product detail page.
 
 (function () {
+  // Only 블루히노키 navigates (to the category page). The other menu
+  // items still react on hover but don't go anywhere.
   const NAV = [
-    { label: '블루히노키', href: 'index.html' },
-    { label: '기프트', href: 'category.html', accent: true },
-    { label: '퍼퓸', href: 'category.html' },
-    { label: '핸드&amp;립', href: 'category.html' },
-    { label: '바디', href: 'category.html' },
-    { label: '홈 프래그런스', href: 'category.html' },
-    { label: '향 노트', href: 'product.html' },
-    { label: '컬렉션', href: 'category.html' },
-    { label: '스토어', href: '#' },
+    { label: '블루히노키', href: 'category.html' },
+    { label: '기프트', accent: true },
+    { label: '퍼퓸' },
+    { label: '핸드&amp;립' },
+    { label: '바디' },
+    { label: '홈 프래그런스' },
+    { label: '향 노트' },
+    { label: '컬렉션' },
+    { label: '스토어' },
   ];
 
   function headerMarkup(variant, navSize) {
     const dark = variant === 'light';
     const sfx = dark ? '-dark' : '';
-    const nav = NAV.map((item) =>
-      `<a href="${item.href}"${item.accent ? ' class="is-accent"' : ''}>${item.label}</a>`
-    ).join('');
+    const nav = NAV.map((item) => {
+      const cls = item.accent ? ' class="is-accent"' : '';
+      return item.href
+        ? `<a href="${item.href}"${cls}>${item.label}</a>`
+        : `<a role="link" aria-disabled="true"${cls}>${item.label}</a>`;
+    }).join('');
 
     return `
       <header class="site-header site-header--${variant}" style="--nav-size:${navSize}px">

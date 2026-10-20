@@ -147,6 +147,7 @@ button { font-family: inherit; }
   white-space: nowrap;
 }
 .site-nav a.is-accent { color: #e93f42; }
+.site-nav a { cursor: pointer; } /* items without a destination still read as interactive */
 .site-nav a:hover { opacity: .7; }
 
 .site-header__icons { margin-top: calc(0.1042 * var(--vw)); /* icons top: 42px */ display: flex; align-items: center; gap: calc(1.6667 * var(--vw)); /* 32px */ }
