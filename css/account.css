@@ -219,8 +219,8 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 .order-sum__actions { display: flex; gap: 8px; margin-top: 90px; }
 .order-sum.is-open .order-sum__actions { margin-top: 76.5px; }
 .order-sum__actions .acc-btn { flex: 1; padding: 8px; font-size: 14px; }
-.order-sum__notice { margin: 24px 0 0; padding: 16px 10px; background: #e9e9e9; font-size: 14px; line-height: 1.2; white-space: normal; word-break: keep-all; /* one line each at 1920 (Figma); wraps inside the box when the column narrows */ display: flex; flex-direction: column; gap: 8px; }
-.order-sum__notice li { list-style: disc; margin-left: 21px; }
+.order-sum__notice { margin: 24px 0 0; padding: calc(0.8333 * var(--vw)) calc(0.5208 * var(--vw)); /* 16px 10px */ background: #e9e9e9; font-size: calc(0.7292 * var(--vw)); /* 14px at 1920 — scales with the box so each sentence stays on one line, as in Figma */ line-height: 1.2; white-space: nowrap; display: flex; flex-direction: column; gap: calc(0.4167 * var(--vw)); /* 8px */ }
+.order-sum__notice li { list-style: disc; margin-left: calc(1.0938 * var(--vw)); /* 21px */ }
 
 .order-done { padding: 80px 0; text-align: center; }
 .order-done h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.6; }
