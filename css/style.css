@@ -109,7 +109,10 @@ button { font-family: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity .8s ease;
 }
+.hero__bg.is-active { opacity: 1; }
 .hero__gradient-top {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -157,10 +160,16 @@ button { font-family: inherit; }
 .site-header--light .site-nav a.is-accent { color: #e93f42; }
 
 .hero__lines { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.hero__line { position: absolute; top: calc(53.6458 * var(--vw)); height: 2px; background: #fff; }
-.hero__line--1 { left: calc(33.8542 * var(--vw)); width: calc(15.625 * var(--vw)); }
-.hero__line--2 { left: calc(50.5208 * var(--vw)); width: calc(15.625 * var(--vw)); }
-.hero__line--3 { left: calc(50.5208 * var(--vw)); width: calc(4.1667 * var(--vw)); }
+/* banner indicators (Figma Line 1-3): a 300px 2px track in #EEEEEE @50%,
+   with a white bar that fills it over --hero-duration, then the banner flips */
+.hero__line { position: absolute; top: calc(53.5417 * var(--vw)); /* stroke spans y1028-1030 */ width: calc(15.625 * var(--vw)); /* 300px */ height: 2px; padding: 0; border: none; background: rgba(238, 238, 238, 0.5); pointer-events: auto; cursor: pointer; }
+.hero__line::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; bottom: -8px; } /* easier to click */
+.hero__line span { display: block; width: 0; height: 100%; background: #fff; }
+.hero__line.is-done span { width: 100%; }
+.hero__line.is-running span { animation: hero-fill var(--hero-duration, 5s) linear forwards; }
+.hero__line--1 { left: calc(33.8542 * var(--vw)); /* x650 */ }
+.hero__line--2 { left: calc(50.5208 * var(--vw)); /* x970 */ }
+@keyframes hero-fill { from { width: 0; } to { width: 100%; } }
 
 .hero__content {
   position: absolute;

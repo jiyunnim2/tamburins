@@ -14,16 +14,18 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero">
-    <img class="hero__bg" src="assets/images/hero-banner.png" alt="BLUE HINOKI" />
+    <div class="hero__slides" data-hero>
+      <img class="hero__bg is-active" src="assets/images/hero-banner.png" alt="BLUE HINOKI" />
+      <img class="hero__bg" src="assets/images/hero-banner-2.jpg" alt="퍼퓸 블루히노키" />
+    </div>
     <div class="hero__gradient-top" aria-hidden="true"></div>
     <div class="hero__gradient-bottom" aria-hidden="true"></div>
 
     <div data-site-header data-variant="overlay"></div>
 
-    <div class="hero__lines">
-      <span class="hero__line hero__line--1"></span>
-      <span class="hero__line hero__line--2"></span>
-      <span class="hero__line hero__line--3"></span>
+    <div class="hero__lines" role="tablist" aria-label="메인 배너">
+      <button type="button" class="hero__line hero__line--1" data-hero-dot aria-label="배너 1"><span></span></button>
+      <button type="button" class="hero__line hero__line--2" data-hero-dot aria-label="배너 2"><span></span></button>
     </div>
 
     <div class="hero__content">
