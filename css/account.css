@@ -139,6 +139,8 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 .cart-row__remove img { width: 24px; height: 24px; }
 .cart-row__remove .cart-row__dash { display: block; width: 24px; text-align: center; }
 .cart__bag-offer { position: relative; display: flex; padding-top: 15.4px; border-top: 0.75px solid #999; font-size: 16px; font-weight: 500; line-height: 1.2; color: var(--c-label); }
+/* no bag in the cart: the closing rule sits as far below the row as the rule above it */
+.cart__bag-offer.is-last { padding-bottom: 15.6px; }
 .cart__bag-offer button { position: absolute; right: 2px; /* ends at x1091, 2px inside the table edge (Figma) */ white-space: nowrap; padding: 0; border: none; background: none; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .cart__bag-offer button:hover { color: var(--c-ink); }
 .cart__bag-offer button:disabled { opacity: .5; cursor: default; text-decoration: none; }

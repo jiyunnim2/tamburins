@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       body.innerHTML = `
         ${cart.products.length ? `<div class="cart-group">${cart.products.map(productRow).join('')}</div>` : ''}
         ${cart.gifts.length ? `<div class="cart-group cart-group--gifts">${cart.gifts.map(giftRow).join('')}</div>` : ''}
-        <div class="cart__bag-offer"><span>쇼핑백을 추가하시겠습니까?</span><button type="button" data-add-bag>추가하기</button></div>
+        <div class="cart__bag-offer${hasBag ? '' : ' is-last'}"><span>쇼핑백을 추가하시겠습니까?</span><button type="button" data-add-bag>추가하기</button></div>
         ${hasBag ? `<div class="cart-group cart-group--bag">${cart.bags.map(productRow).join('')}</div>` : ''}
         <div class="cart__end"></div>`;
     }
