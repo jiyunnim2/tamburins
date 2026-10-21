@@ -93,10 +93,11 @@
           <div class="footer-nav__col">
             <p class="footer-nav__title">소셜 미디어</p>
             <ul>
-              <li><a href="#">인스타그램</a></li>
-              <li><a href="#">카카오톡</a></li>
-              <li><a href="#">페이스북</a></li>
-              <li><a href="#">웨이보</a></li>
+              <!-- TAMBURINS official accounts (as listed on tamburins.com) -->
+              <li><a href="https://www.instagram.com/tamburinsofficial/" target="_blank" rel="noopener noreferrer">인스타그램</a></li>
+              <li><a href="https://pf.kakao.com/_RkqIj" target="_blank" rel="noopener noreferrer">카카오톡</a></li>
+              <li><a href="https://www.facebook.com/tamburinsofficial/" target="_blank" rel="noopener noreferrer">페이스북</a></li>
+              <li><a href="https://weibo.com/tamburinsofficial" target="_blank" rel="noopener noreferrer">웨이보</a></li>
             </ul>
           </div>
         </nav>
