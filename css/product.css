@@ -81,8 +81,8 @@
 .pdp-other__gallery { display: flex; align-items: flex-start; gap: calc(0.5208 * var(--vw)); /* 10px */ }
 .pdp-other__gallery a { display: block; width: calc(7.1354 * var(--vw)); /* 137px */ height: calc(9.4792 * var(--vw)); /* 182px */ overflow: hidden; }
 .pdp-other__gallery a:nth-child(3) { width: calc(7.0833 * var(--vw)); /* 136px */ }
-.pdp-other__gallery img { width: calc(7.1354 * var(--vw)); height: 100%; max-width: none; object-fit: cover; transition: opacity .2s ease; }
-.pdp-other__gallery a:hover img { opacity: .8; }
+.pdp-other__gallery img { width: calc(7.1354 * var(--vw)); height: 100%; max-width: none; object-fit: cover; transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
+.pdp-other__gallery a:hover img { opacity: .85; transform: scale(1.05); } /* product shots: lighten + ease in, like New Arrival / category */
 .pdp-other__gallery .pdp-other__peek { width: calc(2.0833 * var(--vw)); /* 40px sliver of the next card */ }
 .pdp-other__panels { flex: 1; min-width: 0; max-width: 626px; margin-left: calc(7.1354 * var(--vw)); /* 137px */ }
 .pdp-panel { display: flex; flex-direction: column; gap: 20px; }
