@@ -310,6 +310,7 @@ button { font-family: inherit; }
 .collection__col.is-swapped .collection__item:not(.is-collapsed) .collection__info { padding-top: 0; }
 .collection__col.is-swapped .collection__item.is-collapsed .collection__image { height: calc(20.3125 * var(--vw)); }
 .collection__col.is-swapped .collection__item.is-collapsed .collection__info { padding-top: calc(0.8333 * var(--vw)); }
+.collection__col.is-resetting .collection__image, .collection__col.is-resetting .collection__info { transition: none; }
 
 /* hover: only the photo reacts (eases in, softly brightens). Only 블루히노키 links. */
 .collection__item { cursor: pointer; }

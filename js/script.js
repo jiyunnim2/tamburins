@@ -42,17 +42,30 @@ function initHeroBanner() {
   show(0);
 }
 
-// Main Collection side columns: hovering the text-only entry (썸머테일스 /
-// 이브닝글로우) swaps the column — its photo opens and the neighbour's photo
-// closes. The entry's own photo opens under the pointer, so the hover holds
-// while the text slides; leaving the entry swaps everything back.
+// Main Collection side columns: each column shows one entry's photo and
+// the other entry as text only. Hovering the text-only entry swaps the
+// column (its photo opens, the other closes) and the swap stays after the
+// pointer leaves; hovering the entry that is now text-only swaps it back.
+// Every visit to the main page — link, back/forward, or refresh — starts
+// from the default (블루히노키 · 선샤인 · 보타리 photos).
 function initCollectionSwap() {
-  document.querySelectorAll('[data-collection-col]').forEach((col) => {
-    const trigger = col.querySelector('.collection__item.is-collapsed');
-    if (!trigger) return;
-    trigger.addEventListener('mouseenter', () => col.classList.add('is-swapped'));
-    trigger.addEventListener('mouseleave', () => col.classList.remove('is-swapped'));
+  const cols = [...document.querySelectorAll('[data-collection-col]')];
+  if (!cols.length) return;
+  cols.forEach((col) => {
+    col.querySelectorAll('.collection__item').forEach((item) => {
+      item.addEventListener('mouseenter', () => {
+        const swapped = col.classList.contains('is-swapped');
+        const textOnly = item.classList.contains('is-collapsed') !== swapped;
+        if (textOnly) col.classList.toggle('is-swapped');
+      });
+    });
   });
+  const reset = () => cols.forEach((col) => {
+    col.classList.add('is-resetting'); // snap back without animating
+    col.classList.remove('is-swapped');
+    requestAnimationFrame(() => requestAnimationFrame(() => col.classList.remove('is-resetting')));
+  });
+  window.addEventListener('pageshow', (event) => { if (event.persisted) reset(); });
 }
 
 // Category page as search results: ?q= filters the product cards by
