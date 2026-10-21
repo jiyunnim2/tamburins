@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initHeroBanner();
   initCategorySearch();
+  initCollectionSwap();
   initScentStoryNav();
   initNewsletterForm();
 });
@@ -39,6 +40,19 @@ function initHeroBanner() {
 
   window.addEventListener('pageshow', (event) => { if (event.persisted) show(0); });
   show(0);
+}
+
+// Main Collection side columns: hovering the text-only entry (썸머테일스 /
+// 이브닝글로우) swaps the column — its photo opens and the neighbour's photo
+// closes. The entry's own photo opens under the pointer, so the hover holds
+// while the text slides; leaving the entry swaps everything back.
+function initCollectionSwap() {
+  document.querySelectorAll('[data-collection-col]').forEach((col) => {
+    const trigger = col.querySelector('.collection__item.is-collapsed');
+    if (!trigger) return;
+    trigger.addEventListener('mouseenter', () => col.classList.add('is-swapped'));
+    trigger.addEventListener('mouseleave', () => col.classList.remove('is-swapped'));
+  });
 }
 
 // Category page as search results: ?q= filters the product cards by

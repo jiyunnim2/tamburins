@@ -149,10 +149,15 @@
         </div>
       </a>
 
-      <div class="collection__col">
-        <div class="collection__info collection__item" role="link" aria-disabled="true">
-          <p class="collection__brand">TAMBURINS</p>
-          <p class="collection__name">썸머테일스</p>
+      <!-- side columns: one entry shows its photo, the other is text-only.
+           Hovering the text-only entry swaps them (Figma 메인페이지 3차 v3-3). -->
+      <div class="collection__col" data-collection-col>
+        <div class="collection__item is-collapsed" role="link" aria-disabled="true">
+          <div class="collection__image"><img src="assets/images/collection-summertales.jpg" alt="썸머테일스 컬렉션"></div>
+          <div class="collection__info">
+            <p class="collection__brand">TAMBURINS</p>
+            <p class="collection__name">썸머테일스</p>
+          </div>
         </div>
         <div class="collection__item" role="link" aria-disabled="true">
           <div class="collection__image"><img src="assets/images/collection-2.png" alt="선샤인 컬렉션"></div>
@@ -163,7 +168,7 @@
         </div>
       </div>
 
-      <div class="collection__col">
+      <div class="collection__col" data-collection-col>
         <div class="collection__item" role="link" aria-disabled="true">
           <div class="collection__image"><img src="assets/images/collection-3.png" alt="보타리 컬렉션"></div>
           <div class="collection__info">
@@ -171,9 +176,12 @@
             <p class="collection__name">보타리</p>
           </div>
         </div>
-        <div class="collection__info collection__item" role="link" aria-disabled="true">
-          <p class="collection__brand">TAMBURINS</p>
-          <p class="collection__name">이브닝글로우</p>
+        <div class="collection__item is-collapsed" role="link" aria-disabled="true">
+          <div class="collection__image"><img src="assets/images/collection-eveningglow.jpg" alt="이브닝글로우 컬렉션"></div>
+          <div class="collection__info">
+            <p class="collection__brand">TAMBURINS</p>
+            <p class="collection__name">이브닝글로우</p>
+          </div>
         </div>
       </div>
     </div>
