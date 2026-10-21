@@ -36,9 +36,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('[data-points]').textContent = `${cart.points} P`;
 
   const toggle = document.querySelector('[data-summary-toggle]');
+  const itemsWrap = document.querySelector('[data-items-wrap]');
   toggle.addEventListener('click', () => {
     const open = !summary.classList.contains('is-open');
     summary.classList.toggle('is-open', open);
+    // slide the product list down / up to its measured height
+    itemsWrap.style.height = open ? itemsWrap.firstElementChild.offsetHeight + 'px' : '0px';
     toggle.setAttribute('aria-expanded', String(open));
     document.querySelector('[data-summary-icon]').src = `assets/icons/icon-summary-${open ? 'up' : 'down'}.svg`;
   });

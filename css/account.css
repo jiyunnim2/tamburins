@@ -150,7 +150,8 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 .cart__empty a { color: var(--c-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 .cart-promo { position: relative; display: block; aspect-ratio: 1; overflow: hidden; }
-.cart-promo img { width: 100%; height: 100%; object-fit: cover; }
+.cart-promo img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
+.cart-promo:hover img { transform: scale(1.05); filter: brightness(.7); } /* eases in and dims, like the other banner photos */
 .cart-promo::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 21.9298%; /* 100 of 456 */ background: linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0)); }
 .cart-promo span { position: absolute; z-index: 1; right: 10px; bottom: 11px; font-size: 14px; line-height: 1.2; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .cart__summary { margin-top: 35px; padding-top: 14px; border-top: 1px solid var(--c-ink); }
@@ -197,8 +198,8 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 
 .order-sum__toggle { display: flex; align-items: flex-start; justify-content: space-between; width: 100%; margin-top: 28.2px; padding: 0 0 8.4px; border: none; border-bottom: 1px solid var(--c-ink); background: none; font: inherit; font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--c-ink); cursor: pointer; }
 .order-sum__toggle img { width: 24px; height: 24px; margin-top: 1px; }
-.order-sum__items { display: none; padding-top: 19px; }
-.order-sum.is-open .order-sum__items { display: flex; flex-direction: column; gap: 7.67px; }
+.order-sum__items { height: 0; overflow: hidden; transition: height .5s cubic-bezier(.2, .7, .2, 1); } /* height set by js/order.js: slides open / closed */
+.order-sum__items-inner { display: flex; flex-direction: column; gap: 7.67px; padding: 19px 0 23.67px; border-bottom: 0.75px solid #999; }
 .order-sum__item { display: flex; align-items: flex-start; gap: 44px; }
 .order-sum__item .acc-thumb { width: 76px; height: 101.33px; }
 .order-sum__item .acc-thumb--gift { padding-top: 3.96px; }
@@ -210,15 +211,15 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 .order-sum__line span:first-child { line-height: 1.6; }
 .order-sum__line span:first-child b { font-weight: 400; color: var(--c-label); margin-right: 8px; }
 .order-sum__line span:last-child { line-height: 1.4; }
-.order-sum__totals { padding-top: 19px; }
-.order-sum.is-open .order-sum__totals { margin-top: 23.67px; padding-top: 12px; border-top: 0.75px solid #999; }
+.order-sum__totals { padding-top: 19px; transition: padding-top .5s cubic-bezier(.2, .7, .2, 1); }
+.order-sum.is-open .order-sum__totals { padding-top: 12px; }
 .order-sum .acc-amounts dt { gap: 8px; }
 .order-sum .acc-amounts .acc-chip { padding: 2px 6px; margin-top: 2px; }
 .order-sum .acc-total { margin-top: 40px; align-items: flex-start; }
 .order-sum .acc-total p:first-child { font-size: 16px; font-weight: 500; line-height: 1.2; }
 .order-sum .acc-total p:last-child { margin-top: 3px; font-size: 20px; font-weight: 600; line-height: 1.2; }
 .order-sum__points { display: flex; justify-content: space-between; margin-top: 11px; padding: 10px 32px 10px 32px; background: #e9e9e9; font-size: 14px; line-height: 1.2; white-space: nowrap; }
-.order-sum__actions { display: flex; gap: 8px; margin-top: 90px; }
+.order-sum__actions { display: flex; gap: 8px; margin-top: 90px; transition: margin-top .5s cubic-bezier(.2, .7, .2, 1); }
 .order-sum.is-open .order-sum__actions { margin-top: 76.5px; }
 .order-sum__actions .acc-btn { flex: 1; padding: 8px; font-size: 14px; }
 .order-sum__notice { margin: 24px 0 0; padding: calc(0.8333 * var(--vw)) calc(0.5208 * var(--vw)); /* 16px 10px */ background: #e9e9e9; font-size: calc(0.7292 * var(--vw)); /* 14px at 1920 — scales with the box so each sentence stays on one line, as in Figma */ line-height: 1.2; white-space: nowrap; display: flex; flex-direction: column; gap: calc(0.4167 * var(--vw)); /* 8px */ }
