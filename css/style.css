@@ -299,6 +299,13 @@ button { font-family: inherit; }
 .collection__brand { font-size: 14px; font-weight: 400; line-height: 1.6; white-space: nowrap; }
 .collection__name { font-size: 18px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
 .collection__col { display: flex; flex-direction: column; justify-content: space-between; }
+/* hover: every entry reacts the same way — the photo eases in slightly
+   (and softly brightens), the name nudges right. Only 블루히노키 links. */
+.collection__item { cursor: pointer; }
+.collection__image img { transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
+.collection__item:hover .collection__image img { transform: scale(1.05); filter: brightness(1.06); }
+.collection__name { transition: transform .5s cubic-bezier(.2, .7, .2, 1), opacity .5s ease; }
+.collection__item:hover .collection__name { transform: translateX(6px); opacity: .7; }
 /* the text-only entries sit flush: no 16px lead-in above the brand line */
 .collection__col > .collection__info { padding-top: 0; }
 
