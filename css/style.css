@@ -263,7 +263,7 @@ button { font-family: inherit; }
 .fragrance__link:hover { opacity: .7; }
 
 .fragrance__image { width: calc(45.8333 * var(--vw)); aspect-ratio: 1/1; flex-shrink: 0; overflow: hidden; cursor: pointer; }
-.fragrance__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
+.fragrance__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s cubic-bezier(.2, .7, .2, 1), filter .25s ease; }
 /* hover: same as The Gift / Collection — eases in and dims */
 .fragrance__image:hover img { transform: scale(1.05); filter: brightness(.6); }
 
@@ -316,7 +316,7 @@ button { font-family: inherit; }
 
 /* hover: only the photo reacts (eases in and dims). Only 블루히노키 links. */
 .collection__item { cursor: pointer; }
-.collection__image img { transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
+.collection__image img { transition: transform .25s cubic-bezier(.2, .7, .2, 1), filter .25s ease; }
 .collection__image:hover img { transform: scale(1.05); filter: brightness(.6); } /* dims like The Gift */
 
 /* =============================================================
@@ -350,7 +350,7 @@ button { font-family: inherit; }
 .gift-card { display: flex; flex-direction: column; }
 .gift-card__image { aspect-ratio: 920 / 518; overflow: hidden; margin-bottom: calc(1.0417 * var(--vw)); /* 20px */ }
 .gift-card__image { cursor: pointer; }
-.gift-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
+.gift-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s cubic-bezier(.2, .7, .2, 1), filter .25s ease; }
 /* hover: the photo eases in like Collection, but dims slightly */
 .gift-card__image:hover img { transform: scale(1.05); filter: brightness(.6); }
 .gift-card__info { display: flex; flex-direction: column; padding-bottom: calc(0.8333 * var(--vw)); /* 16px */ border-bottom: 1px solid var(--c-ink); }
