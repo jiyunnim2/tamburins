@@ -262,8 +262,10 @@ button { font-family: inherit; }
 .fragrance__link-underline { display: block; height: 1px; width: 152px; background: var(--c-ink); }
 .fragrance__link:hover { opacity: .7; }
 
-.fragrance__image { width: calc(45.8333 * var(--vw)); aspect-ratio: 1/1; flex-shrink: 0; }
-.fragrance__image img { width: 100%; height: 100%; object-fit: cover; }
+.fragrance__image { width: calc(45.8333 * var(--vw)); aspect-ratio: 1/1; flex-shrink: 0; overflow: hidden; cursor: pointer; }
+.fragrance__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
+/* hover: same as The Gift / Collection — eases in and dims */
+.fragrance__image:hover img { transform: scale(1.05); filter: brightness(.6); }
 
 /* =============================================================
    NEW ARRIVAL
@@ -312,10 +314,10 @@ button { font-family: inherit; }
 .collection__col.is-swapped .collection__item.is-collapsed .collection__info { padding-top: calc(0.8333 * var(--vw)); }
 .collection__col.is-resetting .collection__image, .collection__col.is-resetting .collection__info { transition: none; }
 
-/* hover: only the photo reacts (eases in, softly brightens). Only 블루히노키 links. */
+/* hover: only the photo reacts (eases in and dims). Only 블루히노키 links. */
 .collection__item { cursor: pointer; }
 .collection__image img { transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s ease; }
-.collection__image:hover img { transform: scale(1.05); filter: brightness(1.06); }
+.collection__image:hover img { transform: scale(1.05); filter: brightness(.6); } /* dims like The Gift */
 
 /* =============================================================
    SCENT STORY
