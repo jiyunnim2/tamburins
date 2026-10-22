@@ -331,12 +331,12 @@ button { font-family: inherit; }
 .note-card__label { display: flex; flex-direction: column; align-items: center; gap: calc(0.8333 * var(--vw)); /* 16px */ font-size: 18px; font-weight: 400; line-height: 1; letter-spacing: 1.8px; text-align: center; white-space: nowrap; }
 .note-card__label span:first-child { color: var(--c-gray-light); }
 .note-card__image { position: relative; width: 100%; aspect-ratio: 1/1; perspective: 1200px; cursor: pointer; }
-.note-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s cubic-bezier(.45, 0, .2, 1), opacity 1.1s ease; }
+.note-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.45, 0, .2, 1), opacity .9s ease; }
 /* hover (Figma 메인페이지 3차 v3-2): the note turns a full 360° in 3D while
    fading to 10%, then its description rises into the centre */
 .note-card__story { position: absolute; left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 18px)); font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--c-ink); text-align: center; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .35s ease, transform .35s ease; }
 .note-card__image:hover img { transform: rotateY(360deg); opacity: .1; }
-.note-card__image:hover .note-card__story { opacity: 1; transform: translate(-50%, -50%); transition: opacity .6s ease .55s, transform .6s cubic-bezier(.2, .7, .2, 1) .55s; }
+.note-card__image:hover .note-card__story { opacity: 1; transform: translate(-50%, -50%); transition: opacity .6s ease .45s, transform .6s cubic-bezier(.2, .7, .2, 1) .45s; }
 .note-card__text { display: flex; flex-direction: column; align-items: center; }
 .note-card__name { font-weight: 500; font-size: calc(1.9792 * var(--vw)); /* 38px — graphic display type */ line-height: 1; }
 .note-card__underline { display: block; width: calc(13.5417 * var(--vw)); /* 260px */ height: 1px; background: var(--c-ink); margin-top: calc(1.0417 * var(--vw)); /* 20px */ }
