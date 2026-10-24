@@ -242,7 +242,8 @@ html.is-drawer-open { overflow: hidden; }
 .scent-story__arrow img { width: 14px; height: 14px; }
 .scent-story__arrow[data-dir="prev"] img { content: url('../assets/icons/m-back-14.svg'); }
 .scent-story__arrow[data-dir="next"] img { content: url('../assets/icons/m-fwd-14b.svg'); }
-.scent-story__arrow:disabled { opacity: .3; cursor: default; }
+.scent-story__arrow { transition: opacity .15s ease; -webkit-tap-highlight-color: transparent; }
+.scent-story__arrow:active { opacity: .4; }
 .scent-story__current { font-size: 14px; line-height: 1.6; text-align: center; white-space: nowrap; }
 
 /* The Gift */

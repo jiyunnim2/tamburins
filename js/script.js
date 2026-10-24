@@ -98,11 +98,11 @@ function initCategorySearch() {
   grid.before(note);
 }
 
-// Scent Story. Desktop shows the three notes side by side and ships with
-// a single fragrance (블루히노키), so the prev/next controls stay disabled.
-// Mobile (< 1280px) turns the notes into a swipeable strip with the middle
-// note centred and its neighbours peeking; there the arrows step between
-// notes and disable at either end.
+// Scent Story. The prev/next arrows switch between collections (블루히노키 →
+// 선샤인 → 썸머테일스 …). The other collections' pages aren't built yet, so on
+// mobile the arrows take the tap but stay on 블루히노키; desktop keeps them
+// disabled. On mobile (< 1280px) the three notes are a strip you swipe
+// sideways, starting with the middle note centred.
 function initScentStoryNav() {
   const prevBtn = document.querySelector('.scent-story__arrow[data-dir="prev"]');
   const nextBtn = document.querySelector('.scent-story__arrow[data-dir="next"]');
@@ -111,29 +111,17 @@ function initScentStoryNav() {
   const cards = [...track.querySelectorAll('.note-card')];
   const mobile = matchMedia('(max-width: 1279.98px)');
 
-  const current = () => {
-    const mid = track.scrollLeft + track.clientWidth / 2;
-    let best = 0;
-    cards.forEach((c, i) => {
-      if (Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid) < Math.abs(cards[best].offsetLeft + cards[best].offsetWidth / 2 - mid)) best = i;
-    });
-    return best;
+  const centreMiddle = () => {
+    const c = cards[1];
+    if (c) track.scrollLeft = c.offsetLeft + c.offsetWidth / 2 - track.clientWidth / 2;
   };
-  const centre = (i, smooth) => {
-    const c = cards[i];
-    track.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+  const setup = () => {
+    prevBtn.disabled = nextBtn.disabled = !mobile.matches;
+    if (mobile.matches) centreMiddle();
   };
-  const sync = () => {
-    if (!mobile.matches) { prevBtn.disabled = true; nextBtn.disabled = true; return; }
-    const i = current();
-    prevBtn.disabled = i === 0;
-    nextBtn.disabled = i === cards.length - 1;
-  };
-  const setup = () => { if (mobile.matches) centre(1, false); sync(); };
+  // collection pages to come — the tap registers but doesn't navigate yet
+  [prevBtn, nextBtn].forEach((btn) => btn.addEventListener('click', (e) => e.preventDefault()));
 
-  prevBtn.addEventListener('click', () => centre(Math.max(0, current() - 1), true));
-  nextBtn.addEventListener('click', () => centre(Math.min(cards.length - 1, current() + 1), true));
-  track.addEventListener('scroll', () => { clearTimeout(track._t); track._t = setTimeout(sync, 80); }, { passive: true });
   mobile.addEventListener('change', setup);
   window.addEventListener('pageshow', (event) => { if (event.persisted) setup(); });
   setup();
