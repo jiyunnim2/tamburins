@@ -58,6 +58,13 @@ function initCollectionSwap() {
         const textOnly = item.classList.contains('is-collapsed') !== swapped;
         if (textOnly) col.classList.toggle('is-swapped');
       });
+      // touch screens have no hover: a tap on the text-only entry swaps too
+      // (after an emulated mouseenter the entry is no longer text-only, so
+      // this never swaps twice)
+      item.addEventListener('click', () => {
+        const swapped = col.classList.contains('is-swapped');
+        if (item.classList.contains('is-collapsed') !== swapped) col.classList.toggle('is-swapped');
+      });
     });
   });
   const reset = () => cols.forEach((col) => {
@@ -91,16 +98,45 @@ function initCategorySearch() {
   grid.before(note);
 }
 
-// Scent Story section currently ships with a single fragrance (블루히노키).
-// The prev/next controls are wired for when more fragrances are added;
-// today both are disabled since there is nothing else to page to.
+// Scent Story. Desktop shows the three notes side by side and ships with
+// a single fragrance (블루히노키), so the prev/next controls stay disabled.
+// Mobile (< 1280px) turns the notes into a swipeable strip with the middle
+// note centred and its neighbours peeking; there the arrows step between
+// notes and disable at either end.
 function initScentStoryNav() {
   const prevBtn = document.querySelector('.scent-story__arrow[data-dir="prev"]');
   const nextBtn = document.querySelector('.scent-story__arrow[data-dir="next"]');
-  if (!prevBtn || !nextBtn) return;
+  const track = document.querySelector('.scent-story__notes');
+  if (!prevBtn || !nextBtn || !track) return;
+  const cards = [...track.querySelectorAll('.note-card')];
+  const mobile = matchMedia('(max-width: 1279.98px)');
 
-  prevBtn.disabled = true;
-  nextBtn.disabled = true;
+  const current = () => {
+    const mid = track.scrollLeft + track.clientWidth / 2;
+    let best = 0;
+    cards.forEach((c, i) => {
+      if (Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid) < Math.abs(cards[best].offsetLeft + cards[best].offsetWidth / 2 - mid)) best = i;
+    });
+    return best;
+  };
+  const centre = (i, smooth) => {
+    const c = cards[i];
+    track.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+  };
+  const sync = () => {
+    if (!mobile.matches) { prevBtn.disabled = true; nextBtn.disabled = true; return; }
+    const i = current();
+    prevBtn.disabled = i === 0;
+    nextBtn.disabled = i === cards.length - 1;
+  };
+  const setup = () => { if (mobile.matches) centre(1, false); sync(); };
+
+  prevBtn.addEventListener('click', () => centre(Math.max(0, current() - 1), true));
+  nextBtn.addEventListener('click', () => centre(Math.min(cards.length - 1, current() + 1), true));
+  track.addEventListener('scroll', () => { clearTimeout(track._t); track._t = setTimeout(sync, 80); }, { passive: true });
+  mobile.addEventListener('change', setup);
+  window.addEventListener('pageshow', (event) => { if (event.persisted) setup(); });
+  setup();
 }
 
 function initNewsletterForm() {

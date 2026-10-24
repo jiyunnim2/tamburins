@@ -55,11 +55,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const points = o.reviewPoints || (first.option === '50ml' ? 2500 : 1500);
     const actions = o.channel === 'offline'
       ? `<div class="order-card__actions order-card__actions--wide">
-           <button type="button" data-review>후기 작성 (최대 ${points.toLocaleString('ko-KR')}원 적립)</button>
+           <button type="button" data-review><span class="d-only">후기 작성 (최대 ${points.toLocaleString('ko-KR')}원 적립)</span><span class="m-only">후기 작성</span></button>
            <a href="#" class="order-card__store">${esc(o.store || '탬버린즈 매장')} <img src="assets/icons/icon-arrow-forward-14.svg" alt=""></a>
          </div>`
       : `<div class="order-card__actions">
-           <button type="button" data-review>후기 작성 (최대 ${points.toLocaleString('ko-KR')}원 적립)</button>
+           <button type="button" data-review><span class="d-only">후기 작성 (최대 ${points.toLocaleString('ko-KR')}원 적립)</span><span class="m-only">후기 작성</span></button>
            <button type="button" data-rebuy="${esc(first.productId)}|${esc(first.option)}">재구매</button>
          </div>`;
     return `
@@ -120,6 +120,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     location.href = 'index.html';
   });
   document.querySelectorAll('[data-soon]').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+
+  // Mobile (< 1280px) splits the page in two (Figma 모바일 마이페이지):
+  // the menu first, then 주문/배송 opens the order list under a
+  // "< 주문 / 배송" header. The view lives in the URL hash so the back
+  // arrow and the browser's back button both return to the menu.
+  const page = document.querySelector('.mypage');
+  const mHeader = document.querySelector('.m-header');
+  const mobile = matchMedia('(max-width: 1279.98px)');
+  const setView = () => {
+    const orders = location.hash === '#orders';
+    page.dataset.view = orders ? 'orders' : 'menu';
+    if (!mHeader) return;
+    mHeader.classList.toggle('is-sub', orders);
+    mHeader.querySelector('[data-m-title]').textContent = orders ? '주문 / 배송' : '';
+    mHeader.querySelector('[data-back]').toggleAttribute('data-back-custom', orders);
+  };
+  document.querySelector('[data-orders-link]').addEventListener('click', (e) => {
+    if (!mobile.matches) return;
+    e.preventDefault();
+    history.pushState(null, '', '#orders');
+    setView();
+    window.scrollTo(0, 0);
+  });
+  if (mHeader) mHeader.querySelector('[data-back]').addEventListener('click', () => {
+    if (location.hash !== '#orders') return;
+    if (history.state && history.state.fromMenu === false) { history.replaceState(null, '', location.pathname + location.search); setView(); }
+    else history.back();
+  });
+  window.addEventListener('popstate', setView);
+  // opened straight on #orders (reload / shared link): back goes to the menu
+  if (location.hash === '#orders') history.replaceState({ fromMenu: false }, '', location.href);
+  setView();
 
   render();
 });

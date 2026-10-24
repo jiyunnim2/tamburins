@@ -5,52 +5,16 @@
    Sizing: pixel-exact Figma build on the 1920px canvas, responsive
    from 1280px up. Layout, images and graphic type scale with --vw
    (1% of the layout width); informational type stays fixed px with
-   locked line length. 1280px is the floor — below it the page keeps
-   its 1280px layout and scrolls horizontally.
+   locked line length. This sheet only loads at >=1280px; below that
+   mobile.css takes over with the mobile layout.
    ============================================================= */
 
-:root {
-  --c-ink: #111111;
-  --c-ink-70: rgba(17, 17, 17, 0.7);
-  --c-ink-50: rgba(17, 17, 17, 0.5);
-  --c-label: #777777;
-  --c-gray: #707070;
-  --c-gray-light: #9a9a9a;
-  --c-placeholder: #757575;
-  --c-cream: #fffdfc;
-  --c-bg: #efefef;
-  /* 1% of the layout width. Tracks the viewport at >=1280px and freezes
-     at the 1280px floor below that, so nothing compresses further. */
-  --vw: max(1vw, 12.8px);
-  --gutter: calc(1.5625 * var(--vw)); /* 30px */
-}
-
-@font-face {
-  font-family: 'Tamburins Original';
-  src: url('../assets/fonts/TamburinsOriginal-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-* { box-sizing: border-box; }
+/* tokens, fonts and resets live in base.css (shared with mobile.css) */
 
 html { min-width: 1280px; }
-[hidden] { display: none !important; }
 
-body {
-  margin: 0;
-  background: var(--c-bg);
-  color: var(--c-ink);
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-img { display: block; max-width: 100%; }
-a { text-decoration: none; color: inherit; }
-ul { margin: 0; padding: 0; list-style: none; }
-p { margin: 0; }
-button { font-family: inherit; }
+/* mobile-only chrome (rendered by layout.js) stays hidden on desktop */
+.m-header, .m-drawer, .m-only { display: none !important; }
 
 
 
@@ -426,6 +390,7 @@ button { font-family: inherit; }
 .site-footer--ruled .footer-divider--vertical { height: auto; bottom: 0; left: calc(51.0417 * var(--vw)); /* x1010 */ }
 .site-footer--ruled .footer-nav { grid-template-columns: calc(8.2813 * var(--vw)) calc(8.9583 * var(--vw)) calc(8.2813 * var(--vw)) auto; /* x31 / 190 / 362 / 521 */ }
 .site-footer--ruled .footer-newsletter { top: calc(2.6042 * var(--vw)); left: calc(53.6458 * var(--vw)); /* x1060 */ gap: calc(4.4375 * var(--vw)); /* 85px */ }
+.site-footer--ruled .site-footer__legal > .footer-guarantee { display: none; } /* shown under the newsletter instead */
 .site-footer--ruled .footer-guarantee { width: min(580px, calc(43.2292 * var(--vw))); /* stays inside the page edge */ max-width: none; margin-top: calc(32.6px - 4.4375 * var(--vw)); /* 32.6px below the e-mail rule (cancels the column gap) */ text-align: left; }
 .footer-divider { border: none; border-top: 0.75px solid var(--c-ink-50); margin: 0; }
 .footer-divider--legal-gap { margin-bottom: calc(2.6042 * var(--vw)); /* 50px */ }

@@ -1,0 +1,50 @@
+/* =============================================================
+   TAMBURINS — shared base (all breakpoints)
+   Tokens, fonts and resets used by both layouts:
+     desktop  >= 1280px  style.css / pages.css / product.css / account.css
+     mobile   <  1280px  mobile.css (phone 0-599, tablet 600-1279)
+   ============================================================= */
+
+:root {
+  --c-ink: #111111;
+  --c-ink-70: rgba(17, 17, 17, 0.7);
+  --c-ink-50: rgba(17, 17, 17, 0.5);
+  --c-label: #777777;
+  --c-gray: #707070;
+  --c-gray-light: #9a9a9a;
+  --c-placeholder: #757575;
+  --c-cream: #fffdfc;
+  --c-bg: #efefef;
+  /* 1% of the layout width. Tracks the viewport at >=1280px and freezes
+     at the 1280px floor below that, so nothing compresses further. */
+  --vw: max(1vw, 12.8px);
+  --gutter: calc(1.5625 * var(--vw)); /* 30px */
+  /* mobile unit: 1px of the 402px mobile canvas, scaled to the viewport */
+  --mu: calc(100vw / 402);
+}
+
+@font-face {
+  font-family: 'Tamburins Original';
+  src: url('../assets/fonts/TamburinsOriginal-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { margin: 0; padding: 0; list-style: none; }
+p { margin: 0; }
+button { font-family: inherit; }

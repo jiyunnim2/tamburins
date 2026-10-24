@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAMBURINS | 주문서</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/account.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/style.css" media="(min-width: 1280px)">
+<link rel="stylesheet" href="css/account.css" media="(min-width: 1280px)">
+<link rel="stylesheet" href="css/mobile.css" media="(max-width: 1279.98px)">
 </head>
 <body class="acc-page">
 
@@ -14,6 +16,7 @@
 
 <main class="acc-wrap">
   <div class="order-steps">
+    <button type="button" class="m-only order-steps__back" data-back aria-label="뒤로 가기"><img src="assets/icons/m-back-20.svg" alt=""></button>
     <h1 class="acc-title">주문서</h1>
     <i aria-hidden="true"></i>
     <ol>

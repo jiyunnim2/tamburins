@@ -159,3 +159,15 @@ function initReviews() {
 
   render();
 }
+
+// Mobile: the chevron after the buy box notes folds the description.
+document.addEventListener('DOMContentLoaded', () => {
+  const fold = document.querySelector('[data-desc-fold]');
+  if (!fold) return;
+  const box = fold.closest('.pdp-buybox');
+  fold.addEventListener('click', () => {
+    const open = box.classList.toggle('is-desc-folded') === false;
+    fold.setAttribute('aria-expanded', String(open));
+    fold.setAttribute('aria-label', open ? '설명 접기' : '설명 펼치기');
+  });
+});

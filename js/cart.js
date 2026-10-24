@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="acc-item__notes">${esc(g.notes)}</p>
             <p class="acc-item__name">${esc(g.name)}</p>
           </div>
-          <p class="acc-item__option">${g.option ? `${esc(g.option)} / ` : ''}1개</p>
+          <p class="acc-item__option"><span class="d-only">${g.option ? `${esc(g.option)} / ` : ''}1개</span><span class="m-only">무료 증정</span></p>
         </div>
       </div>
       <div class="cart-row__qty"><span class="cart-row__dash">-</span></div>
