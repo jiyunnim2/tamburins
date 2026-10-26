@@ -118,9 +118,10 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
    CART (1129:29857) — 841px table + 456px summary
    ============================================================= */
 .cart { display: flex; justify-content: space-between; align-items: flex-start; }
-.cart__table { width: 57.6271%; /* 816 of 1416 */ }
+.cart__table { width: max(57.6271%, 604px); /* 816 of 1416; never narrower than its columns' minimum */ }
 .cart__aside { width: 32.2034%; /* 456 of 1416 */ margin-top: 87px; /* image top 279 = title top 192 + 87 */ }
-.cart__cols, .cart-row { display: grid; grid-template-columns: 44.1176% 29.4118% 1fr 24px; /* 360 / 240 / … / close of 816 */ }
+.cart__cols, .cart-row { display: grid; grid-template-columns: 360px minmax(120px, 240fr) minmax(100px, 192fr) 24px; /* Figma 360 / 240 / 192 / 24 at 1920. The product column holds fixed-size
+   type (96 thumb + 24 + 216 text), so it stays 360px; quantity and price share the rest and never squeeze under it */ }
 .cart__cols { margin-top: 22.2px; padding-bottom: 14.4px; border-bottom: 1px solid var(--c-ink); font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--c-label); }
 .cart-row { padding: 33px 0 18px; }
 .cart-row--gift { padding: 18.34px 0 0; }

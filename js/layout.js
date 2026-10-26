@@ -60,7 +60,7 @@
               <input id="siteSearchInput" type="search" name="q" placeholder="NEW 컬렉션 블루히노키를 만나보세요." aria-label="검색어" autocomplete="off" tabindex="-1">
             </form>
           </div>
-          <a href="mypage.html" aria-label="마이페이지" data-account-link><img src="assets/icons/icon-favorite${sfx}.svg" alt=""></a>
+          <a href="mypage.html" aria-label="마이페이지" data-account-link><img src="assets/icons/icon-person${sfx}.svg" alt=""></a>
           <a href="cart.html" aria-label="장바구니"><img src="assets/icons/icon-bag${sfx}.svg" alt=""></a>
         </div>
       </header>`;
