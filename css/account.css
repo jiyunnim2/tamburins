@@ -130,8 +130,8 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 .cart-group--gifts { padding-bottom: 17.98px; }
 .cart-row__product { display: flex; gap: 24px; }
 .cart-row__text { display: flex; flex-direction: column; justify-content: space-between; padding: 6px 0 5.6px; }
-/* notes run past the 216px text column and fade out (Figma: 60px #efefef gradient over x558–618) */
-.cart-row .acc-item__notes { width: 246px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 186px, transparent 216px); mask-image: linear-gradient(90deg, #000 186px, transparent 216px); }
+/* notes are cut at the 216px text column with an ellipsis (Figma: …  |  드리…) so they never reach the quantity column */
+.cart-row .acc-item__notes { width: 216px; overflow: hidden; text-overflow: ellipsis; }
 .cart-row--gift .cart-row__text, .cart-group--bag .cart-row__text { padding: 5.66px 0 4.6px; }
 .cart-row__qty, .cart-row__price, .cart-row__remove { padding-top: 6px; }
 .cart-row__price { font-size: 18px; font-weight: 500; line-height: 1.2; white-space: nowrap; }
