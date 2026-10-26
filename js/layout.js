@@ -13,6 +13,7 @@
 //   data-m-variant  "overlay" | "light"  (defaults to data-variant)
 //   data-m-title    back arrow + title instead of the logo (cart, login…)
 //   data-m-right    "menu" (default) | "close" | "none"
+//   data-m-noback   sub header without the back arrow (cart)
 //   data-no-desktop mobile header only (login has no desktop header)
 // The hamburger opens a drawer with the same 9-item nav.
 
@@ -59,7 +60,7 @@
               <input id="siteSearchInput" type="search" name="q" placeholder="NEW 컬렉션 블루히노키를 만나보세요." aria-label="검색어" autocomplete="off" tabindex="-1">
             </form>
           </div>
-          <a href="mypage.html" aria-label="마이페이지" data-account-link><img src="assets/icons/icon-person${sfx}.svg" alt=""></a>
+          <a href="mypage.html" aria-label="마이페이지" data-account-link><img src="assets/icons/icon-favorite${sfx}.svg" alt=""></a>
           <a href="cart.html" aria-label="장바구니"><img src="assets/icons/icon-bag${sfx}.svg" alt=""></a>
         </div>
       </header>`;
@@ -87,7 +88,7 @@
       : right === 'none' ? ''
       : `<button type="button" class="m-header__btn" data-drawer-open aria-label="메뉴 열기" aria-expanded="false"><img src="assets/icons/m-menu${sfx}.svg" alt=""></button>`;
     return `
-      <header class="m-header m-header--${variant}${sub ? ' is-sub' : ''}">
+      <header class="m-header m-header--${variant}${sub ? ' is-sub' : ''}${slot.hasAttribute('data-m-noback') ? ' is-noback' : ''}">
         <a href="index.html" class="m-header__logo"><img src="assets/icons/m-logo${sfx}.svg" alt="TAMBURINS" width="120" height="15"></a>
         <div class="m-header__sub">
           <button type="button" class="m-header__back" data-back aria-label="뒤로 가기"><img src="assets/icons/m-back-20.svg" alt=""></button>

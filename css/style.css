@@ -302,8 +302,11 @@ html { min-width: 1280px; }
 .note-card__image:hover img { transform: rotateY(360deg); opacity: .1; }
 .note-card__image:hover .note-card__story { opacity: 1; transform: translate(-50%, -50%); transition: opacity .6s ease .45s, transform .6s cubic-bezier(.2, .7, .2, 1) .45s; }
 .note-card__text { display: flex; flex-direction: column; align-items: center; }
-.note-card__name { font-weight: 500; font-size: calc(1.9792 * var(--vw)); /* 38px — graphic display type */ line-height: 1; }
-.note-card__underline { display: block; width: calc(13.5417 * var(--vw)); /* 260px */ height: 1px; background: var(--c-ink); margin-top: calc(1.0417 * var(--vw)); /* 20px */ }
+.note-card__name { font-weight: 500; font-size: calc(1.9792 * var(--vw)); /* 38px — graphic display type */ line-height: 1; white-space: nowrap; }
+/* the rule under each name is as long as the name (Figma: PINE OIL 146 / HINOKI 120 / DRIFT WOOD 228) */
+.note-card__underline { display: block; width: calc(7.6042 * var(--vw)); /* 146px */ height: 1px; background: var(--c-ink); margin-top: calc(1.0417 * var(--vw)); /* 20px */ }
+.note-card:nth-child(2) .note-card__underline { width: calc(6.25 * var(--vw)); /* 120px */ }
+.note-card:nth-child(3) .note-card__underline { width: calc(11.875 * var(--vw)); /* 228px */ }
 .note-card__desc { margin-top: calc(1.0417 * var(--vw)); /* 20px */ font-size: 16px; font-weight: 400; line-height: 1.5; text-align: center; white-space: nowrap; }
 
 .scent-story__nav { display: flex; align-items: center; justify-content: center; gap: calc(4.1667 * var(--vw)); /* 80px */ margin-top: calc(3.4896 * var(--vw)); /* 67px below the 2-line note copy */ }

@@ -45,7 +45,7 @@
 .login__panel { width: 50%; display: flex; flex-direction: column; align-items: center; padding: calc(100vh * 268 / 1080) 0 80px; }
 .login__logo { display: block; height: 25px; }
 .login__logo img { width: 202px; height: 25px; }
-.login__rule { width: 62.5%; /* 600 of 960 */ border: none; border-top: 1px solid var(--c-ink); margin: 31.5px 0 0; /* 1px line centred on y325 */ }
+.login__rule { width: 46.875%; /* 450 of 960 — same width as the form */ border: none; border-top: 1px solid var(--c-ink); margin: 31.5px 0 0; /* 1px line centred on y325 */ }
 .login__form { width: 46.875%; /* 450 of 960 */ min-width: 450px; margin-top: 79.5px; }
 .login__head { display: flex; align-items: flex-start; justify-content: space-between; height: 25.6px; }
 .login__label { font-size: 16px; font-weight: 600; line-height: 1.6; margin-left: 1px; }
@@ -78,7 +78,7 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
    MY PAGE (1129:29765) — 304px sidebar + 1056px order list
    ============================================================= */
 .mypage { display: flex; justify-content: space-between; }
-.mypage__side { width: 21.4689%; /* 304 of 1416 */ }
+.mypage__side { width: 15.2542%; /* 216 of 1416 */ }
 .mypage__main { width: 74.5763%; /* 1056 of 1416 */ }
 .mypage__group { margin-top: 32.2px; }
 .mypage__group + .mypage__group { margin-top: 24px; }
@@ -118,9 +118,9 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
    CART (1129:29857) — 841px table + 456px summary
    ============================================================= */
 .cart { display: flex; justify-content: space-between; align-items: flex-start; }
-.cart__table { width: 59.3927%; /* 841 of 1416 */ }
+.cart__table { width: 57.6271%; /* 816 of 1416 */ }
 .cart__aside { width: 32.2034%; /* 456 of 1416 */ margin-top: 87px; /* image top 279 = title top 192 + 87 */ }
-.cart__cols, .cart-row { display: grid; grid-template-columns: 57.0749% 25.6837% 1fr 24px; /* 480 / 216 / … / close */ }
+.cart__cols, .cart-row { display: grid; grid-template-columns: 44.1176% 29.4118% 1fr 24px; /* 360 / 240 / … / close of 816 */ }
 .cart__cols { margin-top: 22.2px; padding-bottom: 14.4px; border-bottom: 1px solid var(--c-ink); font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--c-label); }
 .cart-row { padding: 33px 0 18px; }
 .cart-row--gift { padding: 18.34px 0 0; }
@@ -129,6 +129,8 @@ button.login__guest { padding: 0; border: none; background: none; font-family: i
 .cart-group--gifts { padding-bottom: 17.98px; }
 .cart-row__product { display: flex; gap: 24px; }
 .cart-row__text { display: flex; flex-direction: column; justify-content: space-between; padding: 6px 0 5.6px; }
+/* notes run past the 216px text column and fade out (Figma: 60px #efefef gradient over x558–618) */
+.cart-row .acc-item__notes { width: 246px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 186px, transparent 216px); mask-image: linear-gradient(90deg, #000 186px, transparent 216px); }
 .cart-row--gift .cart-row__text, .cart-group--bag .cart-row__text { padding: 5.66px 0 4.6px; }
 .cart-row__qty, .cart-row__price, .cart-row__remove { padding-top: 6px; }
 .cart-row__price { font-size: 18px; font-weight: 500; line-height: 1.2; white-space: nowrap; }
